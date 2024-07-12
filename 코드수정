@@ -20,4 +20,37 @@ due: 7/15 월 퇴근 전
 import com.tov_banah.sampleroad.Activity.Onboarding.OnboardingActivity // 온보딩 액티비티 임포트
 
 35번째 줄 // 온보딩 페이지를 항상 호출 showOnboarding() } 
-private fun showOnboarding() { val intent = Intent(this, OnboardingActivity::class.java) startActivity(intent) } fun getFcmToken(): String { return PreferenceManager.getDefaultSharedPreferences(applicationContext).getString("FcmToken", null) ?: "" }
+
+import com.tov_banah.sampleroad.Activity.Onboarding.OnboardingActivity // 온보딩 액티비티 임포트
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var mNavController: NavController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+
+        setContentView(R.layout.activity_main)
+
+        mNavController = Navigation.findNavController(this, R.id.Fragment)
+        if (savedInstanceState?.getBoolean("Logout") == true) {
+            mNavController.navigate(R.id.login01_1)
+        }
+
+        // 온보딩 페이지를 항상 호출
+        showOnboarding()
+
+    }
+
+    private fun showOnboarding() {
+        val intent = Intent(this, OnboardingActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun getFcmToken(): String {
+        return PreferenceManager.getDefaultSharedPreferences(applicationContext).getString("FcmToken", null) ?: ""
+    }
+
+    /**

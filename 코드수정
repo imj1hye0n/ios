@@ -5,14 +5,19 @@ To-be: '1계정 당 1회 노출' 제한 삭제 후 지속해서 노출될 수 �
 어떤 코드를 어떻게 수정하면 될지 파악해서 알려주세요!
 due: 7/15 월 퇴근 전
 
+# TeamProductAdapter.kt
        Glide.with(itemView.context)
                 .load(images.getOrNull(2))
                 .override(50,50)
                 .error(R.drawable.no_profile_pic)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-# .diskCacheStrategy(DiskCacheStrategy.ALL)
+//  .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .format(DecodeFormat.PREFER_RGB_565)
                 .into(mBinding.HomeTeamProductProfile3)
         }
 
+# MainActivity.kt
+import com.tov_banah.sampleroad.Activity.Onboarding.OnboardingActivity // 온보딩 액티비티 임포트
 
+35번째 줄 // 온보딩 페이지를 항상 호출 showOnboarding() } 
+private fun showOnboarding() { val intent = Intent(this, OnboardingActivity::class.java) startActivity(intent) } fun getFcmToken(): String { return PreferenceManager.getDefaultSharedPreferences(applicationContext).getString("FcmToken", null) ?: "" }
